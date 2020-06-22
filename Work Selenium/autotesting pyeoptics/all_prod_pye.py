@@ -1,12 +1,10 @@
-import unittest
 import pytest
+import unittest
 from selenium import webdriver
 import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
-import os
-import math
 
 
 class MyTestCase(unittest.TestCase):
@@ -45,7 +43,7 @@ class MyTestCase(unittest.TestCase):
                 "//div[@class='common-header-search__results-more']/a")  # показать все результата (кликнуть по модели сразу не получается)
             return sear
 
-        model = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+        model = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
                 "//div[@class='common-header-search__results-more']/a"  # открывается окно с результатами
@@ -58,7 +56,7 @@ class MyTestCase(unittest.TestCase):
         # закрываем браузер после всех манипуляций
         browser.quit()
 
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
     def test_2(self):
         browser = webdriver.Chrome()
@@ -89,13 +87,13 @@ class MyTestCase(unittest.TestCase):
         kl.click()
 
         def na_me(driver):
-            me = browser.find_element_by_xpath("//span[contains(@class, 'ant-form-item-children')]/input")  # ваше имя
+            me = browser.find_element_by_name("name")  # ваше имя
             return me
 
         na = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
-                By.XPATH,
-                "//span[contains(@class, 'ant-form-item-children')]/input"
+                By.NAME,
+                "name"
             )
         ))
         na.click()
@@ -125,13 +123,13 @@ class MyTestCase(unittest.TestCase):
             )
         ))
         phone.click()
-        phone.send_keys("9119324960")  # ввод
+        phone.send_keys("79119324960")  # ввод
         # успеваем скопировать код
         time.sleep(1)
         # закрываем браузер после всех манипуляций
         browser.quit()
 
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
     def test_3(self):
         browser = webdriver.Chrome()
@@ -243,7 +241,7 @@ class MyTestCase(unittest.TestCase):
         time.sleep(1)
         # закрываем браузер после всех манипуляций
         browser.quit()
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
     def test_4(self):
         browser = webdriver.Chrome()
@@ -311,7 +309,7 @@ class MyTestCase(unittest.TestCase):
         time.sleep(1)
         # закрываем браузер после всех манипуляций
         browser.quit()
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
     def test_5(self):
         browser = webdriver.Chrome()
@@ -332,29 +330,29 @@ class MyTestCase(unittest.TestCase):
 
         def add_button(driver):
             button = browser.find_element_by_xpath(
-                "//div[contains(@class, 'page-item__info-buttons-item')][1]")  # добавить в корзину
+                "//div[contains (@class, 'page-item-common__buttons-item')]")  # добавить в корзину
             return button
 
         add = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'page-item__info-buttons-item')][1]"
+                "//div[contains (@class, 'page-item-common__buttons-item')]"
             )
         ))
         add.click()
 
-        def per_oforml(driver):
+        def go_oforml(driver):
             oforml = browser.find_element_by_xpath(
-                "//a[contains(@class, 'page-item__cart-buttons-item')]")  # перейти к оформлению
+                "//a[contains (@class, 'sideblock-cart__buttons-item')]")  # оформление
             return oforml
 
-        per = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+        go = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//a[contains(@class, 'page-item__cart-buttons-item')]"
+                "//a[contains (@class, 'sideblock-cart__buttons-item')]"
             )
         ))
-        per.click()
+        go.click()
 
         def mail_inp(driver):
             inp = browser.find_element_by_name("email")  # поле email
@@ -384,26 +382,26 @@ class MyTestCase(unittest.TestCase):
 
         def prod_gost(driver):
             gost = browser.find_element_by_xpath(
-                "//button[contains(@class,'ui-button _bordered')]")  # продолжить как гость работает
+                "//div[contains(@class, 'page-checkout-step-auth__body-step-buttons')]/div[2]")  # продолжить как гость работает
             return gost
 
         prod = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//button[contains(@class,'ui-button _bordered')]"
+                "//div[contains(@class, 'page-checkout-step-auth__body-step-buttons')]/div[2]"
             )
         ))
         prod.click()
 
-        def sam_mosk(driver):
+        def sam_mosk(driver):  # КУРЬЕР
             mosk = browser.find_element_by_xpath(
-                "//div[contains(@class, 'page-checkout-step-shipping__body-step-form')][2]/div/div")  # выбрать примерку
+                "//div[contains(@class, 'page-checkout-step-shipping__body-step-form-options')]/div[1]")
             return mosk
 
         sam = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'page-checkout-step-shipping__body-step-form')][2]/div/div"
+                "//div[contains(@class, 'page-checkout-step-shipping__body-step-form-options')]/div[1]"
             )
         ))
         sam.click()
@@ -461,6 +459,188 @@ class MyTestCase(unittest.TestCase):
         apa.send_keys("777")  # ввод
 
         def name_n(driver):
+            n = browser.find_element_by_name("name")  # поле ВАШЕ ИМЯ
+            return n
+
+        name = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.NAME,
+                "name"
+            )
+        ))
+        name.click()
+        name.send_keys("Как найти Xpath ****")  # ввод
+
+        def phone_number(driver):
+            number = browser.find_element_by_name("name")  # поле телефон
+            return number
+
+        phone = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.NAME,
+                "phone"
+            )
+        ))
+        phone.click()
+        phone.send_keys("79119324960")  # ввод
+
+        def prodo_p(driver):  # ПРОДОЛЖИТЬ
+            p = browser.find_element_by_xpath(
+                "//button")
+            return p
+
+        prodo = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//button"
+            )
+        ))
+        prodo.click()
+
+        def prim_homee(driver):
+            homee = browser.find_element_by_xpath(
+                "//div[contains(@class, 'page-checkout-step-payment__body-step-form-options')]/div[1]")
+            return homee
+
+        prim = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//div[contains(@class, 'page-checkout-step-payment__body-step-form-options')]/div[1]"
+            )
+        ))
+        prim.click()
+
+        def prodo_o(driver):  # ПРОДОЛЖИТЬ ПЕРЕХОД К ОПЛАТЕ
+            o = browser.find_element_by_xpath(
+                "//div[contains(@class, 'page-checkout-step-payment__body-step-buttons')]/div")
+            return o  # продолжить
+
+        prodo = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//div[contains(@class, 'page-checkout-step-payment__body-step-buttons')]/div"
+            )
+        ))
+        prodo.click()
+
+        def l_k(driver):
+            k = browser.find_element_by_xpath("//div[@class='common-header__content']/div[4]")
+            return k
+
+        l = WebDriverWait(browser, 15).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//div[@class='common-header__content']/div[4]"
+            )
+        ))
+        l.click()
+
+        # наблюдаем
+        time.sleep(15)
+        # закрываем браузер после всех манипуляций
+        browser.quit()
+        # self.assertEqual(True, False)
+
+        # ПРИМЕРКА
+
+    def test_6(self):
+        browser = webdriver.Chrome()
+        browser.get("https://pyeoptics.com/shop/catalogue/pye-x-fakoshima-kaguya_5892/")
+
+        def add_button(driver):
+            button = browser.find_element_by_xpath(
+                "//div[contains (@class, 'page-item-common__buttons-item')][2]/button")  # добавить в примерку
+            return button
+
+        add = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//div[contains (@class, 'page-item-common__buttons-item')][2]/button"
+            )
+        ))
+        add.click()
+
+        def of_prim(driver):
+            prim = browser.find_element_by_xpath(
+                "//a[contains(@class, 'sideblock-fitting__button-link')]/button")
+            return prim
+
+        of = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//a[contains(@class, 'sideblock-fitting__button-link')]/button"
+            )
+        ))
+        of.click()
+
+        def mail_inp(driver):
+            inp = browser.find_element_by_name("email")  # поле email
+            return inp
+
+        mail = WebDriverWait(browser, 13).until(expected_conditions.element_to_be_clickable(
+            (
+                By.NAME,
+                "email"
+            )
+        ))
+        mail.click()
+        mail.send_keys("testpyeoptics@yandex.ru")  # ввод
+
+        def cont_p(driver):
+            p = browser.find_element_by_xpath(
+                "//div[contains(@class, 'page-fitting-step-auth__body-step-buttons')]/div")  # продолжить
+            return p
+
+        cont = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//div[contains(@class, 'page-fitting-step-auth__body-step-buttons')]/div"
+            )
+        ))
+        cont.click()
+
+        def prod_gost(driver):
+            gost = browser.find_element_by_xpath(
+                "//button[contains(@class,'ui-button _bordered')]")  # продолжить как гость работает
+            return gost
+
+        prod = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//button[contains(@class,'ui-button _bordered')]"
+            )
+        ))
+        prod.click()
+        time.sleep(5)
+
+        def yl_eet(driver):
+            eet = browser.find_element_by_name("name")  # улица
+            return eet
+
+        yl = WebDriverWait(browser, 30).until(expected_conditions.element_to_be_clickable(
+            (
+                By.NAME,
+                "street"
+            )
+        ))
+        yl.click()
+        yl.send_keys("main")  # ввод
+
+        def ho_me(driver):
+            me = browser.find_element_by_name(
+                "house")
+            return me
+
+        ho = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.NAME,
+                "house"
+            )
+        ))
+        ho.click()
+        ho.send_keys("88")
+
+        def name_n(driver):
             n = browser.find_element_by_name("name")  # поле имя фамилия
             return n
 
@@ -484,51 +664,39 @@ class MyTestCase(unittest.TestCase):
             )
         ))
         phone.click()
-        phone.send_keys("9119324960")  # ввод
+        phone.send_keys("79119324960")  # ввод
 
         def prodo_p(driver):
             p = browser.find_element_by_xpath(
-                "//div[contains(@class, 'page-checkout-step-shipping__body-step-buttons-item')]")
+                "//button")
             return p  # продолжить
 
         prodo = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'page-checkout-step-shipping__body-step-buttons-item')]"
+                "//button"
             )
         ))
         prodo.click()
 
-        def prim_erka(driver):
-            erka = browser.find_element_by_xpath(
-                "//div[contains(@class, 'page-checkout-step-payment__body-step-form-options-item-info')]/span[2]")
-            return erka
+        def con_tin(driver):  # понятно продожить
+            tin = browser.find_element_by_xpath(
+                "//div[contains (@class, 'page-fitting-step-payment__body-step-buttons')]/div")
+            return tin  # продолжить
 
-        prim = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # только оправу
+        con = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'page-checkout-step-payment__body-step-form-options-item-info')]/span[2]"
+                "//div[contains (@class, 'page-fitting-step-payment__body-step-buttons')]/div"
             )
         ))
-        prim.click()
-
-        def prodo_o(driver):
-            o = browser.find_element_by_xpath("//button[contains(@class, 'ui-button _uppercase')]")
-            return o  # продолжить
-
-        prodo = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # продолжить
-            (
-                By.XPATH,
-                "//button[contains(@class, 'ui-button _uppercase')]"
-            )
-        ))
-        prodo.click()
+        con.click()
 
         # успеваем скопировать код
-        time.sleep(1)
+        time.sleep(15)
         # закрываем браузер после всех манипуляций
         browser.quit()
-        #self.assertEqual(True, False)
+        # self.assertEqual(True, False)
 
 
 if __name__ == '__main__':
