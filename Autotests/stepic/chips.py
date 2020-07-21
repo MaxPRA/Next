@@ -22,15 +22,30 @@
 # https://docs.pytest.org/en/latest/fixture.html    ФИКСТУРЫ
 #
 #
+                                            # Удалить строку кроме clear
+#  #point.send_keys(Keys.SHIFT + Keys.HOME + Keys.DELETE)
+        #point.send_keys(Keys.CONTROL+"a")
 #
 #
+#       Вот так мы проверяем, что элемент появился:
+#
+# this.waitForPresence(By.css(‘p.message_text’), "Cannot find sent message.");
+# Если наш wait работает, то всё в порядке: сообщения в чате отрисовываются.
 #
 #
+#                                     ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК:
+#   new_window = browser.window_handles[1]
+#   browser.switch_to.window(new_window)
 #
-#
-#
-#
-#
+
+
+#                               НАХОДИМ ЭЛЕМЕНТ СОДЕРЖАЩИЙ ТЕКСТ
+  #  welcome_text_elt = browser.find_element_by_tag_name("h1")
+    # записываем в переменную welcome_text текст из элемента welcome_text_elt
+   # welcome_text = welcome_text_elt.text
+
+    # с помощью assert ПРОВЕРЯЕМ, что ожидаемый ТЕКСТ СОВПАДАЕТ С ТЕКСТОМ НА СТРАНИЦЕ САЙТА
+    # assert "Congratulations! You have successfully registered!" == welcome_text
 
 
 
