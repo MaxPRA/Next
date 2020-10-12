@@ -1,7 +1,0 @@
-[
-  "tests_pye.py::MyTestCase::test_1",
-  "tests_pye.py::MyTestCase::test_2",
-  "tests_pye.py::MyTestCase::test_3",
-  "tests_pye.py::MyTestCase::test_4",
-  "tests_pye.py::MyTestCase::test_5"
-]
