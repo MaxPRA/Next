@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions
 
 
 class MyTestCase(unittest.TestCase):
+
     def test_1(self):
         browser = webdriver.Chrome()
         browser.get("https://pyeoptics.com/")
@@ -17,7 +18,7 @@ class MyTestCase(unittest.TestCase):
                 "//div[contains(@class, 'common-header__content-search')]")  # кнопка поиска
             return button
 
-        add = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+        add = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
                 "//div[contains(@class, 'common-header__content-search')]"
@@ -29,7 +30,7 @@ class MyTestCase(unittest.TestCase):
             sear = browser.find_element_by_name("query")  # поле для ввода
             return sear
 
-        inp = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+        inp = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
             (
                 By.NAME,
                 "query"
@@ -52,7 +53,7 @@ class MyTestCase(unittest.TestCase):
         model.click()
 
         # успеваем скопировать код
-        time.sleep(1)
+        time.sleep(5)
         # закрываем браузер после всех манипуляций
         browser.quit()
 
@@ -63,7 +64,7 @@ class MyTestCase(unittest.TestCase):
         browser.get("https://pyeoptics.com/")
 
         def test_ya(driver):
-            ya = browser.find_element_by_xpath("//div[contains(@class, 'common-header-main-menu')][4]/a")  # здесь
+            ya = browser.find_element_by_xpath("//div[contains(@class, 'common-header-main-menu')][4]/a")
             return ya
 
         test = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
@@ -75,16 +76,18 @@ class MyTestCase(unittest.TestCase):
         test.click()
 
         def kl_ik(driver):
-            ik = browser.find_element_by_xpath("//div[contains(@class, 'plugin-text')]/p[2]/a")  # здесь
+            ik = browser.find_element_by_xpath("//div/p[2]/a")  # здесь
             return ik
 
         kl = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-text')]/p[2]/a"
+                "//div/p[2]/a"
             )
         ))
         kl.click()
+        new_window = browser.window_handles[1]
+        browser.switch_to.window(new_window)
 
         def na_me(driver):
             me = browser.find_element_by_name("name")  # ваше имя
@@ -113,7 +116,7 @@ class MyTestCase(unittest.TestCase):
         mail.send_keys("testpyeoptics@yandex.ru")  # ввод
 
         def phone_number(driver):
-            number = browser.find_element_by_name("name")  # поле телефон
+            number = browser.find_element_by_name("phone")  # поле телефон
             return number
 
         phone = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
@@ -124,8 +127,36 @@ class MyTestCase(unittest.TestCase):
         ))
         phone.click()
         phone.send_keys("79119324960")  # ввод
+
+        # выбираем время, доработать выбор элемента не первого
+        # //div[contains(@class, 'schedule-day__items')] вся колонка
+        def time_pye(driver):
+            time_seven = browser.find_element_by_xpath("//button[contains(@class, 'slot__time')]")
+            return time_seven
+
+        add_time = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//button[contains(@class, 'slot__time')]"
+            )
+        ))
+        add_time.click()
+
+        def zapisat():
+            zapis = browser.find_element_by_xpath(
+                "//button[contains(@class, 'bf-button ant-btn ant-btn-primary ant-btn-lg  force-hover')]")
+            return zapis
+
+        click_zap = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//button[contains(@class, 'bf-button ant-btn ant-btn-primary ant-btn-lg  force-hover')]"
+            )
+        ))
+        click_zap.click()
+
         # успеваем скопировать код
-        time.sleep(1)
+        time.sleep(8)
         # закрываем браузер после всех манипуляций
         browser.quit()
 
@@ -137,13 +168,13 @@ class MyTestCase(unittest.TestCase):
 
         def filter_button(driver):
             button = browser.find_element_by_xpath(
-                "//div[contains(@class, 'plugin-common-catalog-filters__headline-trigger')]/span[2]")  # кнопка фильтр
+                "//span[contains(@class, 'plugin-common-catalog-filters__headline-trigger-title')]")  # кнопка фильтр
             return button
 
         filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-common-catalog-filters__headline-trigger')]/span[2]"
+                "//span[contains(@class, 'plugin-common-catalog-filters__headline-trigger-title')]"
             )
         ))
         filter.click()
@@ -161,22 +192,18 @@ class MyTestCase(unittest.TestCase):
         ))
         filter.click()
 
-        # a = browser.find_element_by_css_selector('.common-filters__list-item-options-item-text').click()   #круглые
-
         def filter_two(driver):
             two = browser.find_element_by_xpath(
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _small')]/div/div[2]")  # размер м
+                "//div[2]/div[1]/div[3]/div[2]/div[2]")  # размер м
             return two
 
         filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # размер м
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _small')]/div/div[2]"
+                "//div[2]/div[1]/div[3]/div[2]/div[2]"
             )
         ))
         filter.click()
-
-        # b = browser.find_element_by_css_selector('.common-filters__list-item_small > div.common-filters__list-item-options > div:nth-child(2)').click()     #размер м
 
         def filter_three(driver):
             three = browser.find_element_by_xpath(
@@ -191,54 +218,47 @@ class MyTestCase(unittest.TestCase):
         ))
         filter.click()
 
-        # c = browser.find_element_by_css_selector('.common-filters__list-item_wide > div.common-filters__list-item-options > div:nth-child(1)').click()  # чёрный
-
         def filter_four(driver):
             four = browser.find_element_by_xpath(
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[2]")
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[4]")
             return four
 
         filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # серый
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[2]"
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[4]"
             )
         ))
         filter.click()
 
-        # d = browser.find_element_by_css_selector('.common-filters__list-item-options > div:nth-child(4)').click()    #серый
-
         def filter_five(driver):
             five = browser.find_element_by_xpath(
-                "//div[contains(@class, 'filters__list-item-options-item_decorated')][7]")
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[8]")
             return five
 
         filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # зелёный
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[7]"
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[8]"
             )
         ))
         filter.click()
-
-        # e = browser.find_element_by_css_selector('.common-filters__list-item-options > div:nth-child(8)').click()   #зелёный
 
         def filter_six(driver):
             six = browser.find_element_by_xpath(
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[3]")
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[10]")
             return six
 
-        filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # кристальный
+        filter = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(  # яркий
             (
                 By.XPATH,
-                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[3]"
+                "//div[contains(@class, 'plugin-common-catalog-filters__content-list-item _wide')]/div/div[10]"
             )
         ))
         filter.click()
-        # f = browser.find_element_by_css_selector('.common-filters__list-item_wide > div.common-filters__list-item-options > div:nth-child(3)').click()  #кристальный
 
         # успеваем скопировать код
-        time.sleep(1)
+        time.sleep(3)
         # закрываем браузер после всех манипуляций
         browser.quit()
         # self.assertEqual(True, False)
@@ -317,13 +337,13 @@ class MyTestCase(unittest.TestCase):
 
         def pye_optics(driver):
             optics = browser.find_element_by_xpath(
-                "//a[(@class = 'common-card-product') and @href='/shop/catalogue/polo_6134/']")  # модель очков из появ. списка
+                "//a[(@class = 'common-card-product') and @href='/shop/catalogue/twig-20_6590/']")  # модель очков из появ. списка
             return optics
 
-        pye = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
+        pye = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//a[(@class = 'common-card-product') and @href='/shop/catalogue/polo_6134/']"
+                "//a[(@class = 'common-card-product') and @href='/shop/catalogue/twig-20_6590/']"
             )
         ))
         pye.click()
@@ -382,13 +402,13 @@ class MyTestCase(unittest.TestCase):
 
         def prod_gost(driver):
             gost = browser.find_element_by_xpath(
-                "//div[contains(@class, 'page-checkout-step-auth__body-step-buttons')]/div[2]")  # продолжить как гость работает
+                "//button[contains(@class, 'ui-button _bordered')]")  # продолжить как гость
             return gost
 
         prod = WebDriverWait(browser, 10).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains(@class, 'page-checkout-step-auth__body-step-buttons')]/div[2]"
+                "//button[contains(@class, 'ui-button _bordered')]"
             )
         ))
         prod.click()
@@ -430,7 +450,7 @@ class MyTestCase(unittest.TestCase):
             )
         ))
         ho.click()
-        ho.send_keys("2")  # ввод
+        ho.send_keys("boooot")  # ввод
 
         def k_s(driver):
             s = browser.find_element_by_name("name")  # корпус
@@ -469,7 +489,7 @@ class MyTestCase(unittest.TestCase):
             )
         ))
         name.click()
-        name.send_keys("Как найти Xpath ****")  # ввод
+        name.send_keys("Maxim")  # ввод
 
         def phone_number(driver):
             number = browser.find_element_by_name("name")  # поле телефон
@@ -549,13 +569,13 @@ class MyTestCase(unittest.TestCase):
 
         def add_button(driver):
             button = browser.find_element_by_xpath(
-                "//div[contains (@class, 'page-item-common__buttons-item')][2]/button")  # добавить в примерку
+                "//button[contains(@class, 'ui-button _uppercase _yellow')]")  # добавить в примерку
             return button
 
         add = WebDriverWait(browser, 20).until(expected_conditions.element_to_be_clickable(
             (
                 By.XPATH,
-                "//div[contains (@class, 'page-item-common__buttons-item')][2]/button"
+                "//button[contains(@class, 'ui-button _uppercase _yellow')]"
             )
         ))
         add.click()
@@ -651,7 +671,7 @@ class MyTestCase(unittest.TestCase):
             )
         ))
         name.click()
-        name.send_keys("Как найти Xpath ****")  # ввод
+        name.send_keys("Как найти Xpath")  # ввод
 
         def phone_number(driver):
             number = browser.find_element_by_name("name")  # поле телефон
